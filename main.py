@@ -1,4 +1,5 @@
 from tkinter import *
+from draw_pieces_badly import *
 
 class MyFirstGUI:
     def __init__(self, master):
@@ -13,6 +14,9 @@ class MyFirstGUI:
 
         self.close_button = Button(master, text="Close", command=master.quit)
         self.close_button.grid(row=2, columnspan=2)
+
+        self.draw_pieces_badly = DrawPiecesBadly()
+        self.draw_pieces_badly.draw(self.board_control)
 
     def greet(self):
         print("Greetings!")
