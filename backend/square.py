@@ -7,6 +7,7 @@ class Square(namedtuple('Square', ['x', 'y'])):
     def in_bounds(self):
         return self.x >= 1 and self.x <= 8 and self.y >= 1 and self.y <= 8
 
+    @staticmethod
     def from_notation( s ):
         x = ord(s[0]) - 96
         y = ord(s[1]) - 48
