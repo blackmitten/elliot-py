@@ -1,4 +1,7 @@
 from backend.square import Square
+from backend.fen_char_piece_visitor import FenCharPieceVisitor
+import backend.pieces as pieces
+import backend.board_factory as board_factory
 
 class AQuickTests:
     @staticmethod
@@ -48,7 +51,31 @@ class AQuickTests:
         v = s1 - s2
         assert(v.x == -4)
         assert(v.y == 3)
-        pass
+        
+    @staticmethod
+    def fen_char():
+        visitor = FenCharPieceVisitor()
+        assert( pieces.Pawn( Square(2,2), True).accept( visitor ) == "P" )
+        assert( pieces.Pawn( Square(2,2), False).accept( visitor ) == "p" )
+        assert( pieces.Rook( Square(2,2), True).accept( visitor ) == "R" )
+        assert( pieces.Rook( Square(2,2), False).accept( visitor ) == "r" )
+        assert( pieces.Bishop( Square(2,2), True).accept( visitor ) == "B" )
+        assert( pieces.Bishop( Square(2,2), False).accept( visitor ) == "b" )
+        assert( pieces.Knight( Square(2,2), True).accept( visitor ) == "N" )
+        assert( pieces.Knight( Square(2,2), False).accept( visitor ) == "n" )
+        assert( pieces.King( Square(2,2), True).accept( visitor ) == "K" )
+        assert( pieces.King( Square(2,2), False).accept( visitor ) == "k" )
+        assert( pieces.Queen( Square(2,2), True).accept( visitor ) == "Q" )
+        assert( pieces.Queen( Square(2,2), False).accept( visitor ) == "q" )
+
+    @staticmethod
+    def init_new_board():
+        board = board_factory.BoardFactory.init_new_game()
+        board_fen = board.get_fen_string()
+        starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        assert( board_fen == starting_fen)
+
+
 
 methods = [name for name in dir(AQuickTests) if callable(getattr(AQuickTests, name)) if not name.startswith('_')]
 for method in methods:

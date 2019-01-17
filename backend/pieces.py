@@ -3,31 +3,31 @@ from abc import ABC, abstractmethod
 class Piece(ABC):
 
     @abstractmethod
-    def IsKing(self):
+    def is_king(self):
         pass
     @abstractmethod
-    def IsRook(self):         
+    def is_rook(self):         
         pass
     @abstractmethod
-    def IsPawn(self):         
+    def is_pawn(self):         
         pass
     @abstractmethod
-    def IsQueen(self):         
+    def is_queen(self):         
         pass
     @abstractmethod
-    def IsBishop(self):         
+    def is_bishop(self):         
         pass
     @abstractmethod
-    def IsKnight(self):         
+    def is_knight(self):         
         pass
     @abstractmethod
-    def Accept(self, visitor):         
+    def accept(self, visitor):         
         pass
 
-    def IsDiagonalMover(self):
-        return IsDiagonalMover(self)
-    def IsStraightMover(self):         
-        return IsStraightMover(self)
+    def is_diagonal_mover(self):
+        return is_diagonal_mover(self)
+    def is_straight_mover(self):         
+        return is_straight_mover(self)
 
     def is_piece(self):
         return True
@@ -35,147 +35,147 @@ class Piece(ABC):
 
 class PieceVisitor(ABC):
     @abstractmethod
-    def VisitPawn(self):         
+    def visit_pawn(self):         
         pass
     @abstractmethod
-    def VisitKing(self):         
+    def visit_king(self):         
         pass
     @abstractmethod
-    def VisitRook(self):         
+    def visit_rook(self):         
         pass
     @abstractmethod
-    def VisitQueen(self):         
+    def visit_queen(self):         
         pass
     @abstractmethod
-    def VisitBishop(self):         
+    def visit_bishop(self):         
         pass
     @abstractmethod
-    def VisitKnight(self):         
+    def visit_knight(self):         
         pass
 
-def IsDiagonalMover(piece):
-    return piece.IsBishop() or piece.IsQueen()
+def is_diagonal_mover(piece):
+    return piece.is_bishop() or piece.is_queen()
 
-def IsStraightMover(piece):         
-    return piece.IsRook() or piece.IsQueen()
+def is_straight_mover(piece):         
+    return piece.is_rook() or piece.is_queen()
 
 class Pawn(Piece):
     def __init__(self, pos, white):
         self.white=white
         self.pos=pos
 
-    def IsKing(self):
+    def is_king(self):
         return False
-    def IsRook(self):         
+    def is_rook(self):         
         return False
-    def IsPawn(self):         
+    def is_pawn(self):         
         return True
-    def IsQueen(self):         
+    def is_queen(self):         
         return False
-    def IsBishop(self):         
+    def is_bishop(self):         
         return False
-    def IsKnight(self):         
+    def is_knight(self):         
         return False
-    def Accept(self, visitor):
-        return visitor.VisitPawn(self)
+    def accept(self, visitor):
+        return visitor.visit_pawn(self)
 
 class King(Piece):
     def __init__(self, pos, white):
         self.white=white
         self.pos=pos
 
-    def IsKing(self):
+    def is_king(self):
         return True
-    def IsRook(self):         
+    def is_rook(self):         
         return False
-    def IsPawn(self):         
+    def is_pawn(self):         
         return False
-    def IsQueen(self):         
+    def is_queen(self):         
         return False
-    def IsBishop(self):         
+    def is_bishop(self):         
         return False
-    def IsKnight(self):         
+    def is_knight(self):         
         return False
-    def Accept(self, visitor):
-        return visitor.VisitKing(self)
+    def accept(self, visitor):
+        return visitor.visit_king(self)
 
 class Rook(Piece):
     def __init__(self, pos, white):
         self.white=white
         self.pos=pos
 
-    def IsKing(self):
+    def is_king(self):
         return False
-    def IsRook(self):         
+    def is_rook(self):         
         return True
-    def IsPawn(self):         
+    def is_pawn(self):         
         return False
-    def IsQueen(self):         
+    def is_queen(self):         
         return False
-    def IsBishop(self):         
+    def is_bishop(self):         
         return False
-    def IsKnight(self):         
+    def is_knight(self):         
         return False
-    def Accept(self, visitor):
-        return visitor.VisitRook(self)
+    def accept(self, visitor):
+        return visitor.visit_rook(self)
 
 class Queen(Piece):
     def __init__(self, pos, white):
         self.white=white
         self.pos=pos
 
-    def IsKing(self):
+    def is_king(self):
         return False
-    def IsRook(self):         
+    def is_rook(self):         
         return False
-    def IsPawn(self):         
+    def is_pawn(self):         
         return False
-    def IsQueen(self):         
+    def is_queen(self):         
         return True
-    def IsBishop(self):         
+    def is_bishop(self):         
         return False
-    def IsKnight(self):         
+    def is_knight(self):         
         return False
-    def Accept(self, visitor):
-        return visitor.VisitQueen(self)
+    def accept(self, visitor):
+        return visitor.visit_queen(self)
 
 class Bishop(Piece):
     def __init__(self, pos, white):
         self.white=white
         self.pos=pos
 
-    def IsKing(self):
+    def is_king(self):
         return False
-    def IsRook(self):         
+    def is_rook(self):         
         return False
-    def IsPawn(self):         
+    def is_pawn(self):         
         return False
-    def IsQueen(self):         
+    def is_queen(self):         
         return False
-    def IsBishop(self):         
+    def is_bishop(self):         
         return True
-    def IsKnight(self):         
+    def is_knight(self):         
         return False
-    def Accept(self, visitor):
-        return visitor.VisitBishop(self)
+    def accept(self, visitor):
+        return visitor.visit_bishop(self)
 
 class Knight(Piece):
     def __init__(self, pos, white):
         self.white=white
         self.pos=pos
 
-    def IsKing(self):
+    def is_king(self):
         return False
-    def IsRook(self):         
+    def is_rook(self):         
         return False
-    def IsPawn(self):         
+    def is_pawn(self):         
         return False
-    def IsQueen(self):         
+    def is_queen(self):         
         return False
-    def IsBishop(self):         
+    def is_bishop(self):         
         return False
-    def IsKnight(self):         
+    def is_knight(self):         
         return True
-    def Accept(self, visitor):
-        return visitor.VisitKnight(self)
+    def accept(self, visitor):
+        return visitor.visit_knight(self)
 
