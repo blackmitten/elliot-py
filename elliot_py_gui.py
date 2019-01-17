@@ -1,7 +1,13 @@
 from tkinter import *
 from draw_pieces_badly import *
+from backend.board import *
+from backend.board_factory import *
 
-class MyFirstGUI:
+class ElliotPyGui:
+    def new_game(self):
+        self.board = BoardFactory.init_new_game()
+        
+
     def __init__(self, master):
         self.master = master
         master.title("A simple GUI")
@@ -18,9 +24,11 @@ class MyFirstGUI:
         self.draw_pieces_badly = DrawPiecesBadly()
         self.draw_pieces_badly.draw(self.board_control)
 
+        self.new_game()
+
     def greet(self):
         print("Greetings!")
 
 root = Tk()
-my_gui = MyFirstGUI(root)
+my_gui = ElliotPyGui(root)
 root.mainloop()

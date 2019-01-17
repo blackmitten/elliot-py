@@ -28,6 +28,9 @@ class Piece(ABC):
         return IsDiagonalMover(self)
     def IsStraightMover(self):         
         return IsStraightMover(self)
+
+    def is_piece(self):
+        return True
     
 
 class PieceVisitor(ABC):
@@ -57,8 +60,9 @@ def IsStraightMover(piece):
     return piece.IsRook() or piece.IsQueen()
 
 class Pawn(Piece):
-    def __init__(self, white):
+    def __init__(self, pos, white):
         self.white=white
+        self.pos=pos
 
     def IsKing(self):
         return False
@@ -76,8 +80,9 @@ class Pawn(Piece):
         return visitor.VisitPawn(self)
 
 class King(Piece):
-    def __init__(self, white):
+    def __init__(self, pos, white):
         self.white=white
+        self.pos=pos
 
     def IsKing(self):
         return True
@@ -95,8 +100,9 @@ class King(Piece):
         return visitor.VisitKing(self)
 
 class Rook(Piece):
-    def __init__(self, white):
+    def __init__(self, pos, white):
         self.white=white
+        self.pos=pos
 
     def IsKing(self):
         return False
@@ -114,8 +120,9 @@ class Rook(Piece):
         return visitor.VisitRook(self)
 
 class Queen(Piece):
-    def __init__(self, white):
+    def __init__(self, pos, white):
         self.white=white
+        self.pos=pos
 
     def IsKing(self):
         return False
@@ -133,8 +140,9 @@ class Queen(Piece):
         return visitor.VisitQueen(self)
 
 class Bishop(Piece):
-    def __init__(self, white):
+    def __init__(self, pos, white):
         self.white=white
+        self.pos=pos
 
     def IsKing(self):
         return False
@@ -152,8 +160,9 @@ class Bishop(Piece):
         return visitor.VisitBishop(self)
 
 class Knight(Piece):
-    def __init__(self, white):
+    def __init__(self, pos, white):
         self.white=white
+        self.pos=pos
 
     def IsKing(self):
         return False
