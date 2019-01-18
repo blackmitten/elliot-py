@@ -1,4 +1,4 @@
-from tkinter import *
+#from tkinter import canvas
 
 class DrawPiecesBadly:
     def __init__(self):
