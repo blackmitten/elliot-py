@@ -1,5 +1,4 @@
 from backend.square import Square
-from backend.fen_char_piece_visitor import FenCharPieceVisitor
 import backend.pieces as pieces
 import backend.board_factory as board_factory
 from menzel_py.assertion import *
@@ -55,19 +54,18 @@ class AQuickTests:
         
     @staticmethod
     def fen_char():
-        visitor = FenCharPieceVisitor()
-        Assert.are_equal( pieces.Pawn( Square(2,2), True).accept( visitor ), "P" )
-        Assert.are_equal( pieces.Pawn( Square(2,2), False).accept( visitor ), "p" )
-        Assert.are_equal( pieces.Rook( Square(2,2), True).accept( visitor ), "R" )
-        Assert.are_equal( pieces.Rook( Square(2,2), False).accept( visitor ), "r" )
-        Assert.are_equal( pieces.Bishop( Square(2,2), True).accept( visitor ), "B" )
-        Assert.are_equal( pieces.Bishop( Square(2,2), False).accept( visitor ), "b" )
-        Assert.are_equal( pieces.Knight( Square(2,2), True).accept( visitor ), "N" )
-        Assert.are_equal( pieces.Knight( Square(2,2), False).accept( visitor ), "n" )
-        Assert.are_equal( pieces.King( Square(2,2), True).accept( visitor ), "K" )
-        Assert.are_equal( pieces.King( Square(2,2), False).accept( visitor ), "k" )
-        Assert.are_equal( pieces.Queen( Square(2,2), True).accept( visitor ), "Q" )
-        Assert.are_equal( pieces.Queen( Square(2,2), False).accept( visitor ), "q" )
+        Assert.are_equal( pieces.Pawn( Square(2,2), True).fen_char(), "P" )
+        Assert.are_equal( pieces.Pawn( Square(2,2), False).fen_char(), "p" )
+        Assert.are_equal( pieces.Rook( Square(2,2), True).fen_char(), "R" )
+        Assert.are_equal( pieces.Rook( Square(2,2), False).fen_char(), "r" )
+        Assert.are_equal( pieces.Bishop( Square(2,2), True).fen_char(), "B" )
+        Assert.are_equal( pieces.Bishop( Square(2,2), False).fen_char(), "b" )
+        Assert.are_equal( pieces.Knight( Square(2,2), True).fen_char(), "N" )
+        Assert.are_equal( pieces.Knight( Square(2,2), False).fen_char(), "n" )
+        Assert.are_equal( pieces.King( Square(2,2), True).fen_char(), "K" )
+        Assert.are_equal( pieces.King( Square(2,2), False).fen_char(), "k" )
+        Assert.are_equal( pieces.Queen( Square(2,2), True).fen_char(), "Q" )
+        Assert.are_equal( pieces.Queen( Square(2,2), False).fen_char(), "q" )
 
     @staticmethod
     def init_new_board():

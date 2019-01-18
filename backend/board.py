@@ -1,4 +1,3 @@
-from backend.fen_char_piece_visitor import FenCharPieceVisitor
 from backend.square import Square
 
 class Board:
@@ -46,7 +45,6 @@ class Board:
 
     def get_fen_string( self ):
         fen = ""
-        fen_visitor = FenCharPieceVisitor()
 
         for y in range(8, 0, -1):
             x = 1
@@ -57,8 +55,7 @@ class Board:
                     if empty_squares > 0:
                         fen += str( empty_squares )
                         empty_squares = 0
-                    fen_char = piece.accept( fen_visitor )
-                    fen += fen_char
+                    fen += piece.fen_char()
                 else:
                     empty_squares += 1
                 x += 1

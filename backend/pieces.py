@@ -23,6 +23,9 @@ class Piece(ABC):
     @abstractmethod
     def accept(self, visitor):         
         pass
+    @abstractmethod
+    def fen_char(self):
+        pass
 
     def is_diagonal_mover(self):
         return is_diagonal_mover(self)
@@ -35,22 +38,22 @@ class Piece(ABC):
 
 class PieceVisitor(ABC):
     @abstractmethod
-    def visit_pawn(self):         
+    def visit_pawn(self, data):         
         pass
     @abstractmethod
-    def visit_king(self):         
+    def visit_king(self, data):         
         pass
     @abstractmethod
-    def visit_rook(self):         
+    def visit_rook(self, data):         
         pass
     @abstractmethod
-    def visit_queen(self):         
+    def visit_queen(self, data):         
         pass
     @abstractmethod
-    def visit_bishop(self):         
+    def visit_bishop(self, data):         
         pass
     @abstractmethod
-    def visit_knight(self):         
+    def visit_knight(self, data):         
         pass
 
 def is_diagonal_mover(piece):
@@ -76,8 +79,10 @@ class Pawn(Piece):
         return False
     def is_knight(self):         
         return False
-    def accept(self, visitor):
-        return visitor.visit_pawn(self)
+    def accept(self, visitor, data):
+        return visitor.visit_pawn(self, data)
+    def fen_char(self):
+        return "P" if self.white else "p"
 
 class King(Piece):
     def __init__(self, pos, white):
@@ -96,8 +101,10 @@ class King(Piece):
         return False
     def is_knight(self):         
         return False
-    def accept(self, visitor):
-        return visitor.visit_king(self)
+    def accept(self, visitor, data):
+        return visitor.visit_king(self, data)
+    def fen_char(self):
+        return "K" if self.white else "k"
 
 class Rook(Piece):
     def __init__(self, pos, white):
@@ -116,8 +123,10 @@ class Rook(Piece):
         return False
     def is_knight(self):         
         return False
-    def accept(self, visitor):
-        return visitor.visit_rook(self)
+    def accept(self, visitor, data):
+        return visitor.visit_rook(self, data)
+    def fen_char(self):
+        return "R" if self.white else "r"
 
 class Queen(Piece):
     def __init__(self, pos, white):
@@ -136,8 +145,10 @@ class Queen(Piece):
         return False
     def is_knight(self):         
         return False
-    def accept(self, visitor):
-        return visitor.visit_queen(self)
+    def accept(self, visitor, data):
+        return visitor.visit_queen(self, data)
+    def fen_char(self):
+        return "Q" if self.white else "q"
 
 class Bishop(Piece):
     def __init__(self, pos, white):
@@ -156,8 +167,10 @@ class Bishop(Piece):
         return True
     def is_knight(self):         
         return False
-    def accept(self, visitor):
-        return visitor.visit_bishop(self)
+    def accept(self, visitor, data):
+        return visitor.visit_bishop(self, data)
+    def fen_char(self):
+        return "B" if self.white else "b"
 
 class Knight(Piece):
     def __init__(self, pos, white):
@@ -176,6 +189,8 @@ class Knight(Piece):
         return False
     def is_knight(self):         
         return True
-    def accept(self, visitor):
-        return visitor.visit_knight(self)
+    def accept(self, visitor, data):
+        return visitor.visit_knight(self, data)
+    def fen_char(self):
+        return "N" if self.white else "n"
 

@@ -5,6 +5,7 @@ from backend.board_factory import BoardFactory
 class ElliotPyGui:
     def new_game(self):
         self.board = BoardFactory.init_new_game()
+        self.draw_pieces_badly.draw( self.board_control, self.board )
         
 
     def __init__(self, master):
@@ -21,7 +22,6 @@ class ElliotPyGui:
         self.close_button.grid(row=2, columnspan=2)
 
         self.draw_pieces_badly = DrawPiecesBadly()
-        self.draw_pieces_badly.draw(self.board_control)
 
         self.new_game()
 
