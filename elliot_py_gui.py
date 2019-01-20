@@ -1,12 +1,17 @@
 import tkinter
-from draw_pieces_badly import *
+from draw_pieces_badly import DrawPiecesBadly
 from backend.board_factory import BoardFactory
+from backend.human_player import HumanPlayer
+from backend.game import Game
 
 class ElliotPyGui:
     def new_game(self):
         self.board = BoardFactory.init_new_game()
-        self.draw_pieces_badly.draw( self.board_control, self.board )
-        
+        white_player = HumanPlayer( True )
+        black_player = HumanPlayer( False )
+        self.__draw_pieces_badly.draw( self.board_control, self.board )
+        self.__game = Game( white_player, black_player, self.board )
+        self.__game.start_play()
 
     def __init__(self, master):
         self.master = master
@@ -21,7 +26,7 @@ class ElliotPyGui:
         self.close_button = tkinter.Button(master, text="Close", command=master.quit)
         self.close_button.grid(row=2, columnspan=2)
 
-        self.draw_pieces_badly = DrawPiecesBadly()
+        self.__draw_pieces_badly = DrawPiecesBadly()
 
         self.new_game()
 
