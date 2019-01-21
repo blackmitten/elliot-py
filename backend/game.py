@@ -32,10 +32,9 @@ class Game:
             self.game_state = GameState.stale_mate
         if board.whites_turn:
             if board.white_can_move():
-                if not self.__white_player.human:
-                    pass
-                    #self.__user_interface.machine_thinking = True
-                #move = self.__white_player.Play( board )
+                if not self.__white_player.human():
+                    self.__user_interface.machine_thinking( True )
+                move = self.__white_player.play( board )
             elif board.white_in_check():
                 self.game_state = GameState.black_wins
             else:

@@ -3,12 +3,13 @@ from draw_pieces_badly import DrawPiecesBadly
 from backend.board_factory import BoardFactory
 from backend.human_player import HumanPlayer
 from backend.game import Game
+from backend.user_interface import UserInterface
 
-class ElliotPyGui:
+class ElliotPyGui(UserInterface):
     def new_game(self):
         self.board = BoardFactory.init_new_game()
-        white_player = HumanPlayer( True )
-        black_player = HumanPlayer( False )
+        white_player = HumanPlayer( True, self )
+        black_player = HumanPlayer( False, self )
         self.__draw_pieces_badly.draw( self.board_control, self.board )
         self.__game = Game( white_player, black_player, self.board )
         self.__game.start_play()
@@ -32,6 +33,17 @@ class ElliotPyGui:
 
     def greet(self):
         print("Greetings!")
+
+    def waiting_for_black_human( self, b ):
+        pass
+
+    def waiting_for_white_human( self, b ):
+        pass
+
+    def wait_for_human( self ):
+        pass
+
+
 
 root = tkinter.Tk()
 my_gui = ElliotPyGui(root)
