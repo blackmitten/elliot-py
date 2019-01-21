@@ -89,3 +89,10 @@ class Board:
         fen += str(self.full_move_clock)
         return fen
 
+    def white_can_move( self ):
+        #return GetAllMoves(true).Count > 0;
+        return True
+
+    def black_can_move( self ):
+        #return GetAllMoves(false).Count > 0;
+        return True
