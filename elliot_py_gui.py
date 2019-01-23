@@ -11,7 +11,8 @@ class ElliotPyGui(UserInterface):
         self.board = BoardFactory.init_new_game()
         white_player = HumanPlayer( True, self )
         black_player = HumanPlayer( False, self )
-        self.board_control.draw( self.board )
+        self.board_control.board = self.board
+        self.board_control.draw()
         self.__game = Game( white_player, black_player, self, self.board )
         self.__game.start_play()
 

@@ -6,7 +6,7 @@ class DrawPiecesBadly(PieceVisitor):
         self.width = 400.0
         self.square_width = self.width / 8
 
-    def draw( self, canvas, board ):
+    def draw( self, canvas, board, start_square, machine_thinking ):
         dark=False
         for x in range(0,8):
             dark = not dark
@@ -20,6 +20,9 @@ class DrawPiecesBadly(PieceVisitor):
                 piece.accept( self, canvas )
             for piece in board.white_pieces:
                 piece.accept( self, canvas )
+        if start_square.in_bounds():
+            canvas.create_rectangle( (start_square.x - 1) * self.square_width, (8 - start_square.y) * self.square_width,
+                (start_square.x) * self.square_width, (9 - start_square.y) * self.square_width, outline = 'red', width = 4 )
     
     def draw_piece_preamble( self, piece ):
         color = 'white' if piece.white else 'black'

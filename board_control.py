@@ -14,6 +14,7 @@ class BoardControl:
         self.waiting_for_black_human = False
         self.waiting_for_white_human = False
         self.__move_start_square = Square( 0, 0 )
+        self.board = None
 
     def board_clicked(self, event):
         x = 1 + math.floor( event.x / self.__square_width )
@@ -41,11 +42,13 @@ class BoardControl:
                     # {
                     #     _humanMoved.Set();
                     # }
+        self.draw()
 
 
 
-    def draw( self, board ):
-        self.__draw_pieces_badly.draw( self.canvas, board )
+    def draw( self ):
+        if ( self.board != None ):
+            self.__draw_pieces_badly.draw( self.canvas, self.board, self.__move_start_square, False )
 
     def wait_for_human( self ):
         return 1
