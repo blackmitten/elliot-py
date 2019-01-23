@@ -27,12 +27,12 @@ class BoardControl:
         if clicked_square.in_bounds():
             if self.waiting_for_black_human or self.waiting_for_white_human:
                 if not self.__move_start_square.in_bounds():
-                    # clicked_piece = __board.get_piece_on_square( clicked_square )
-                    # if not clicked_piece = None:
-                        # if ( clicked_piece.white and self.waiting_for_white_human ) or
-                        #    ( clicked_piece.black and self.waiting_for_black_human ):
-                            # self.__move_start_square = clicked_square
-                    self.__move_start_square = clicked_square
+                    clicked_piece = self.board.get_piece_on_square( clicked_square )
+                    if not clicked_piece == None:
+                        click_valid = ( clicked_piece.white and self.waiting_for_white_human ) or \
+                           ( not clicked_piece.white and self.waiting_for_black_human )
+                        if click_valid:
+                            self.__move_start_square = clicked_square
                 else:
                     self.__move_start_square = Square( 0, 0 )
                     # _humansMove = new Move(_board, _moveStartSquare, clickedSquare);

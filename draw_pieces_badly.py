@@ -13,8 +13,8 @@ class DrawPiecesBadly(PieceVisitor):
             for y in range(0,8):
                 dark = not dark
                 fill_color = '#707070' if dark else '#a0a0a0'
-                canvas.create_rectangle( x*self.width/8, y*self.width/8, 
-                    (x+1)*self.width/8, (y+1)*self.width/8, outline=fill_color, fill=fill_color )
+                canvas.create_rectangle( x*self.square_width, y*self.square_width, 
+                    (x+1)*self.square_width, (y+1)*self.square_width, outline=fill_color, fill=fill_color )
         if board is not None:
             for piece in board.black_pieces:
                 piece.accept( self, canvas )
