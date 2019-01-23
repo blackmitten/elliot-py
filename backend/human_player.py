@@ -15,7 +15,7 @@ class HumanPlayer(Player):
         return "Human"
     
     def play( self, board ):
-        self.__user_interface.waiting_for_black_human( not self.__white )
-        self.__user_interface.waiting_for_white_human( self.__white )
+        self.__user_interface.waiting_for_black_human = not self.__white
+        self.__user_interface.waiting_for_white_human = self.__white
         return self.__user_interface.wait_for_human()
     

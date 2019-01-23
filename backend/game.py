@@ -10,9 +10,10 @@ class GameState(Enum):
     abandoned = 4
 
 class Game:
-    def __init__( self,  white_player, black_player, board ):
+    def __init__( self, white_player, black_player, user_interface, board ):
         self.__white_player = white_player
         self.__black_player = black_player
+        self.__user_interface = user_interface
         self.__board = board
         self.game_state = GameState.in_play
 

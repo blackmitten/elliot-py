@@ -12,7 +12,7 @@ class ElliotPyGui(UserInterface):
         white_player = HumanPlayer( True, self )
         black_player = HumanPlayer( False, self )
         self.board_control.draw( self.board )
-        self.__game = Game( white_player, black_player, self.board )
+        self.__game = Game( white_player, black_player, self, self.board )
         self.__game.start_play()
 
     def __init__(self, master):
@@ -33,15 +33,25 @@ class ElliotPyGui(UserInterface):
     def greet(self):
         print("Greetings!")
 
-    def waiting_for_black_human( self, b ):
-        pass
-
-    def waiting_for_white_human( self, b ):
-        pass
 
     def wait_for_human( self ):
-        pass
+        return self.board_control.wait_for_human()
 
+    @property
+    def waiting_for_black_human( self ):
+        return self.board_control.waiting_for_black_human
+
+    @property
+    def waiting_for_white_human( self ):
+        return self.board_control.waiting_for_white_human
+
+    @waiting_for_black_human.setter
+    def waiting_for_black_human( self, waiting_for_black_human):
+        self.board_control.waiting_for_black_human = waiting_for_black_human
+
+    @waiting_for_white_human.setter
+    def waiting_for_white_human( self, waiting_for_white_human):
+        self.board_control.waiting_for_white_human = waiting_for_white_human
 
 
 root = tkinter.Tk()
