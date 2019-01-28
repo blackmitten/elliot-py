@@ -96,3 +96,6 @@ class Board:
     def black_can_move( self ):
         #return GetAllMoves(false).Count > 0;
         return True
+
+    def make_move( self, move, switch_sides, undo ):
+        raise NotImplementedError()

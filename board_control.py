@@ -1,7 +1,10 @@
 import tkinter
 from draw_pieces_badly import DrawPiecesBadly
 from backend.square import Square
+from backend.move import Move
+from backend.move_validator import MoveValidator
 import math
+from threading import Event
 
 class BoardControl:
 
@@ -14,6 +17,7 @@ class BoardControl:
         self.waiting_for_black_human = False
         self.waiting_for_white_human = False
         self.__move_start_square = Square( 0, 0 )
+        self.human_moved = Event()
         self.board = None
 
     def board_clicked(self, event):
@@ -34,14 +38,12 @@ class BoardControl:
                         if click_valid:
                             self.__move_start_square = clicked_square
                 else:
-                    self.__move_start_square = Square( 0, 0 )
-                    # _humansMove = new Move(_board, _moveStartSquare, clickedSquare);
-                    # MoveValidator moveValidator = new MoveValidator();
-                    # _moveStartSquare = new Square();
-                    # if (moveValidator.Validate(_humansMove))
-                    # {
-                    #     _humanMoved.Set();
-                    # }
+                    self.humans_move = Move( self.board, self.__move_start_square, clicked_square )
+                    self.__move_start_square = Square(0, 0)
+                    move_validator = MoveValidator()
+                    if move_validator.validate( self.humans_move ):
+                        print( "Human moved " + str( self.humans_move ) )
+                        self.human_moved.set()
         self.draw()
 
 
@@ -51,4 +53,7 @@ class BoardControl:
             self.__draw_pieces_badly.draw( self.canvas, self.board, self.__move_start_square, False )
 
     def wait_for_human( self ):
-        return 1
+        self.human_moved.clear()
+        while not self.human_moved.is_set():
+            self.human_moved.wait( 0.1 )
+        return self.humans_move

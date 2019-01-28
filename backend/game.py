@@ -53,46 +53,51 @@ class Game:
                 self.game_state = GameState.stale_mate
             #self.__user_interface.machine_thinking = False
         '''
-            if (!_applicationClosing)
+        if (!_applicationClosing)
+        {
+            _userInterface.Redraw();
+        }
+        '''
+        if self.game_state == GameState.in_play:
+            undo = None
+            board.make_move( move, True, undo )
+'''
+        if (GameState == GameState.InPlay)
+        {
+            _log.Write(move.ToLongString());
+            _userInterface.WaitForInstructionToMove();
+            try
             {
-                _userInterface.Redraw();
-            }
-            if (GameState == GameState.InPlay)
-            {
-                _log.Write(move.ToLongString());
-                _userInterface.WaitForInstructionToMove();
-                try
-                {
-                    _moveValidator.Validate(move);
-                    var undo = new Undo();
+                _moveValidator.Validate(move);
+                var undo = new Undo();
 #if DIAGNOSTIC
-                    string fenBefore = _board.GetFenString();
+                string fenBefore = _board.GetFenString();
 
-                    _board.Move(move, true, undo);
-                    string fenAfter = _board.GetFenString();
-                    _board.CheckIntegrity();
-                    Assert.IsTrue(fenBefore != fenAfter);
+                _board.Move(move, true, undo);
+                string fenAfter = _board.GetFenString();
+                _board.CheckIntegrity();
+                Assert.IsTrue(fenBefore != fenAfter);
 
-                    _board.UndoLastmove( undo );
-                    string fenAfterUndo = _board.GetFenString();
-                    _board.CheckIntegrity();
-                    Assert.IsTrue(fenBefore == fenAfterUndo);
+                _board.UndoLastmove( undo );
+                string fenAfterUndo = _board.GetFenString();
+                _board.CheckIntegrity();
+                Assert.IsTrue(fenBefore == fenAfterUndo);
 
-                    _board.Move(move, true, undo);
-                    string fenAfterAgain = _board.GetFenString();
-                    _board.CheckIntegrity();
-                    Assert.IsTrue(fenAfter == fenAfterAgain);
+                _board.Move(move, true, undo);
+                string fenAfterAgain = _board.GetFenString();
+                _board.CheckIntegrity();
+                Assert.IsTrue(fenAfter == fenAfterAgain);
 #else
-                    _board.Move(move, true, undo);
-                    _board.CheckIntegrity();
+                _board.Move(move, true, undo);
+                _board.CheckIntegrity();
 #endif
-                }
-                catch (InvalidMoveException e)
-                {
-                    _userInterface.InvalidMove(e.Message);
-                }
-
-                _userInterface.Redraw();
             }
+            catch (InvalidMoveException e)
+            {
+                _userInterface.InvalidMove(e.Message);
+            }
+
+            _userInterface.Redraw();
+        }
          '''
 

@@ -8,4 +8,5 @@ class Move:
         self.promoted = None
         self.capturing = False
 
-        
+    def __str__(self):
+        return str(self.start) + str(self.end)
