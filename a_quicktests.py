@@ -1,4 +1,6 @@
 from backend.square import Square
+from backend.move import Move
+from backend.move_validator import MoveValidator
 import backend.pieces as pieces
 import backend.board_factory as board_factory
 from menzel_py.assertion import *
@@ -74,6 +76,26 @@ class AQuickTests:
         starting_fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
         Assert.are_equal( board_fen, starting_fen)
 
+
+    @staticmethod
+    def reject_invalid_moves():
+        board = board_factory.BoardFactory.init_new_game()
+        validator = MoveValidator()
+
+        move = Move( board, Square.from_notation( "e1" ), Square.from_notation( "e1" ) )
+        Assert.is_false( validator.validate( move ), "MoveValidator should reject move with start and end square the same" )
+
+        move = Move( board, Square.from_notation( "e3" ), Square.from_notation( "e4" ) )
+        Assert.is_false( validator.validate( move ), "MoveValidator should reject move from unoccupied square" )
+
+        move = Move( board, Square.from_notation( "e7" ), Square.from_notation( "e6" ) )
+        Assert.is_false( validator.validate( move ), "MoveValidator should reject black move when it's white's turn" )
+
+        move = Move( board, Square.from_notation( "e2" ), Square.from_notation( "e3" ) )
+        Assert.is_true( validator.validate( move ), "MoveValidator should allow white pawn moving one space" )
+
+        move = Move( board, Square.from_notation( "e2" ), Square.from_notation( "e5" ) )
+        Assert.is_false( validator.validate( move ), "MoveValidator should reject pawn moving three spaces" )
 
 
 methods = [name for name in dir(AQuickTests) if callable(getattr(AQuickTests, name)) if not name.startswith('_')]
