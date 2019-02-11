@@ -4,6 +4,7 @@ from backend.move_validator import MoveValidator
 import backend.pieces as pieces
 import backend.board_factory as board_factory
 from menzel_py.assertion import *
+from menzel_py.testing import run_tests_in_class
 
 class AQuickTests:
     @staticmethod
@@ -97,10 +98,5 @@ class AQuickTests:
         move = Move( board, Square.from_notation( "e2" ), Square.from_notation( "e5" ) )
         Assert.is_false( validator.validate( move ), "MoveValidator should reject pawn moving three spaces" )
 
+run_tests_in_class(AQuickTests)
 
-methods = [name for name in dir(AQuickTests) if callable(getattr(AQuickTests, name)) if not name.startswith('_')]
-for method in methods:
-    print(method)
-    getattr(AQuickTests, method)()
-
-print("All tests done")

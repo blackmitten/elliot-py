@@ -1,7 +1,10 @@
 class Assert:
     @staticmethod
-    def are_equal(o1, o2, msg=""):
-        if(o1 != o2):
+    def are_equal(o1, o2, delta = None, msg=""):
+        if not delta is None:
+            if(abs(o1 - o2) > delta ):
+                raise AssertionError
+        elif(o1 != o2):
             raise AssertionError
             
     @staticmethod
